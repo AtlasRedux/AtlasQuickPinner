@@ -18,6 +18,8 @@ QuickPinner is a compact floating panel that sticks to the edge of your screen. 
 - **Auto-save** — window size, position, and all pinned folders persist across sessions
 - **Zero dependencies** — ships as a single self-contained `.exe`
 
+### NOTE! It's a large single binary, because .NET 9 is embedded into it.
+
 ## Quick Start
 
 ```
