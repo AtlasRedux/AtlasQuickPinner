@@ -41,7 +41,8 @@ namespace QuickPinner
             StartPosition = FormStartPosition.Manual;
             TopMost = true;
             BackColor = Color.FromArgb(32, 32, 32);
-            Icon = new Icon(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pin-icon.ico"));
+            using var iconStream = typeof(QuickPinnerForm).Assembly.GetManifestResourceStream("AtlasQuickPinner.pin-icon.ico");
+            if (iconStream != null) Icon = new Icon(iconStream);
 
             LoadConfig();
             CreateControls();

@@ -13,4 +13,7 @@
     <AssemblyName>AtlasQuickPinner</AssemblyName>
     <ApplicationIcon>pin-icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="pin-icon.ico" />
+  </ItemGroup>
 </Project>
