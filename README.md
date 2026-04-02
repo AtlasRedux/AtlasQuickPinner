@@ -1,6 +1,6 @@
 # Atlas QuickPinner
 
-A lightweight, always-on-top Windows sidebar for instant access to your active folders, instead of Windows' terrible Pin feature. No more digging through File Explorer — pin your folders once, open them with a single click.
+A lightweight, always-on-top, fully resizeable Windows sidebar for instant access to your active folders, instead of Windows' terrible Pin feature. No more digging through File Explorer — pin your folders once, open them with a single click.
 
 <img width="239" height="334" alt="Skjermbilde 2026-04-02 134224" src="https://github.com/user-attachments/assets/610048b0-c2a6-4427-91e2-025c13f43792" />
 
