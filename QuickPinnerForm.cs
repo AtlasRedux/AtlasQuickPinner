@@ -312,11 +312,11 @@ namespace QuickPinner
             _selectButtons = newSelect;
 
             Button[] newOpen = new Button[newIndex + 1];
-            Array.Copy(_openButtons, newOpen, newOpen.Length);
+            Array.Copy(_openButtons, newOpen, _openButtons.Length);
             _openButtons = newOpen;
 
             Button[] newClear = new Button[newIndex + 1];
-            Array.Copy(_clearButtons, newClear, newClear.Length);
+            Array.Copy(_clearButtons, newClear, _clearButtons.Length);
             _clearButtons = newClear;
 
             // Create new controls - use existing folder path from _folderPaths
