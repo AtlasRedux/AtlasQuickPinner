@@ -6,13 +6,13 @@ A tiny always-on-top Windows utility for quick folder access with a native dark 
 
 - **Always on top**: Floats above other windows
 - **Dark title bar**: Native Windows dark mode via DWM API (`DWMWA_USE_IMMERSIVE_DARK_MODE`)
-- **Vertical layout**: 5 adjustable bars for your favorite folders
+- **Vertical layout**: Unlimited vertical bars, auto-adjusting based on window height
 - **Two actions per bar**:
   - **Select**: Choose a folder to pin
   - **Open**: Open the pinned folder in File Explorer
 - **Compact**: Fits to the side of your screen
 - **Draggable**: Click anywhere on the window to drag
-- **Persistent**: Saves your pinned folders automatically
+- **Persistent**: Saves your pinned folders automatically (unlimited bars)
 - **Resizable**: Auto-adjusts the number of bars based on window height
 
 ## Quick Start
@@ -33,7 +33,7 @@ Folders are stored in `config.json` next to the executable:
 
 The config file stores:
 - Window size and position
-- Your 5 pinned folder paths
+- Your pinned folder paths (unlimited)
 
 ## Build
 
@@ -76,6 +76,7 @@ dotnet clean
 - **Language**: C#
 - **Dark title bar**: Windows DWM API (`DwmSetWindowAttribute`)
 - **Self-contained build**: Single-file executable (~160MB) with embedded .NET runtime
+- **Unlimited bars**: Auto-adjusts based on window height
 - **Source size**: ~20KB
 
 ## Project Structure
