@@ -41,6 +41,7 @@ namespace QuickPinner
             StartPosition = FormStartPosition.Manual;
             TopMost = true;
             BackColor = Color.FromArgb(32, 32, 32);
+            Icon = new Icon(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pin-icon.ico"));
 
             LoadConfig();
             CreateControls();
