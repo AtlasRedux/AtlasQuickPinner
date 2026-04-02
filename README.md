@@ -2,6 +2,9 @@
 
 A lightweight, always-on-top Windows sidebar for instant access to your active folders, instead of Windows' terrible Pin feature. No more digging through File Explorer — pin your folders once, open them with a single click.
 
+<img width="479" height="669" alt="Skjermbilde 2026-04-02 134224" src="https://github.com/user-attachments/assets/610048b0-c2a6-4427-91e2-025c13f43792" />
+
+
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows) ![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet) ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 
 ## What It Does
