@@ -1,5 +1,6 @@
 # Atlas QuickPinner
 
+Quickly pin your workspace- or favourite folders and open them quickly and easily!
 A lightweight, always-on-top, fully resizeable and scaleable with automatic button addition/removal with memory, Windows sidebar for instant access to your active folders, instead of Windows' terrible Pin feature. No more digging through File Explorer — pin your folders once, open them with a single click.
 
 <img width="239" height="334" alt="Skjermbilde 2026-04-02 134224" src="https://github.com/user-attachments/assets/610048b0-c2a6-4427-91e2-025c13f43792" />
