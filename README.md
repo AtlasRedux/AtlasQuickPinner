@@ -1,99 +1,108 @@
 # Atlas QuickPinner
 
-A tiny always-on-top Windows utility for quick folder access with a native dark title bar.
+A lightweight, always-on-top Windows sidebar for instant access to your active folders, instead of Windows' terrible Pin feature. No more digging through File Explorer — pin your folders once, open them with a single click.
+
+![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows) ![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet) ![License: MIT](https://img.shields.io/badge/License-MIT-green)
+
+## What It Does
+
+QuickPinner is a compact floating panel that sticks to the edge of your screen. Each row ("bar") holds one pinned folder — select it once, then open it instantly anytime. The window resizes dynamically: stretch it taller to get more bars, shrink it to get fewer.
 
 ## Features
 
-- **Always on top**: Floats above other windows
-- **Dark title bar**: Native Windows dark mode via DWM API (`DWMWA_USE_IMMERSIVE_DARK_MODE`)
-- **Vertical layout**: Unlimited vertical bars, auto-adjusting based on window height
-- **Two actions per bar**:
-  - **Select**: Choose a folder to pin
-  - **Open**: Open the pinned folder in File Explorer
-- **Compact**: Fits to the side of your screen
-- **Draggable**: Click anywhere on the window to drag
-- **Persistent**: Saves your pinned folders automatically (unlimited bars)
-- **Resizable**: Auto-adjusts the number of bars based on window height
+- **Always on top** — stays visible while you work in other apps
+- **Native dark title bar** — uses the Windows DWM API for a clean Windows 11 look
+- **Unlimited folder bars** — auto-adjusts to window height (60px per bar)
+- **One-click folder access** — Select, Open, or Clear any pinned folder
+- **Drag anywhere** — click and drag the window body to reposition
+- **Auto-save** — window size, position, and all pinned folders persist across sessions
+- **Zero dependencies** — ships as a single self-contained `.exe`
 
 ## Quick Start
 
-1. **Build** (if needed): Run `build.bat` to compile
-2. **Launch**: Run `Launch.bat` to start
-3. **Position**: Drag the window to your desired location
-4. **Pin folders**: Click **Select** on any bar to choose a folder
-5. **Quick access**: Click **Open** to quickly access that folder
-
-## Configuration
-
-Folders are stored in `config.json` next to the executable:
-
 ```
-<app_directory>\config.json
+build.bat        # compile (produces publish\AtlasQuickPinner.exe)
+Launch.bat       # run
 ```
 
-The config file stores:
-- Window size and position
-- Your pinned folder paths (unlimited)
+1. Drag the window to a screen edge
+2. Click **Select** on any bar to pin a folder
+3. Click **Open** to jump straight to it in File Explorer
+4. Click **Clear** (red) to unpin
 
-## Build
+## Building from Source
 
-### Single-file self-contained build (recommended for distribution):
+### Requirements
+
+| | Minimum |
+|---|---|
+| **OS** | Windows 10 build 1809+ |
+| **SDK** | .NET 9 SDK (build only) |
+| **Runtime** | None — self-contained build bundles .NET |
+
+### Self-contained release build (recommended)
 
 ```batch
 build.bat
 ```
 
-This produces a standalone executable in the `publish` folder that includes the .NET runtime. No external dependencies needed.
+Produces `publish\AtlasQuickPinner.exe` (~160 MB) — a single-file executable with the .NET 9 runtime embedded. Runs on any Windows 10/11 machine with nothing else installed.
 
-### Debug build:
+### Debug build
 
 ```batch
 dotnet build QuickPinner.csproj
 ```
 
-Output: `bin\Debug\net9.0-windows\AtlasQuickPinner.dll`
+Output: `bin\Debug\net9.0-windows\AtlasQuickPinner.dll` (requires .NET 9 Runtime).
 
-### Clean:
+### Clean
 
 ```batch
 clean.bat
 ```
 
-Or manually:
-```batch
-dotnet clean
+Removes `bin/`, `obj/`, and `publish/` directories.
+
+## Configuration
+
+All state is saved to `config.json` in the same directory as the executable:
+
+```json
+{
+  "size": [220, 325],
+  "location": [0, 100],
+  "paths": ["C:\\Projects", "D:\\Downloads", null, null, null]
+}
 ```
 
-## Requirements
+| Field | Description |
+|---|---|
+| `size` | Window width and height in pixels |
+| `location` | Window X and Y screen position |
+| `paths` | Array of pinned folder paths (`null` = empty bar) |
 
-- **For building**: .NET 9 SDK
-- **For running (debug)**: .NET 9 Runtime
-- **For running (self-contained)**: Windows 10/11 (no .NET needed)
-
-## Technical Details
-
-- **Framework**: .NET 9 / WinForms
-- **Language**: C#
-- **Dark title bar**: Windows DWM API (`DwmSetWindowAttribute`)
-- **Self-contained build**: Single-file executable (~160MB) with embedded .NET runtime
-- **Unlimited bars**: Auto-adjusts based on window height
-- **Source size**: ~20KB
+The config is written automatically when you close the app or change a pin. You can also edit it by hand.
 
 ## Project Structure
 
 ```
-AtlasQuickPinnerGHRelease/
-├── QuickPinner.csproj      # Project file
-├── Program.cs              # Entry point
-├── QuickPinnerForm.cs      # Main form (dark title bar logic)
-├── build.bat               # Build script (self-contained)
-├── clean.bat               # Clean script
-├── Launch.bat              # Quick launch
-├── config.json             # Config template
-├── README.md               # This file
-└── .gitignore              # Git ignore rules
+├── QuickPinnerForm.cs   # All UI and logic (~525 lines)
+├── Program.cs           # Entry point
+├── QuickPinner.csproj   # .NET 9 WinForms project
+├── config.json          # Saved state (auto-generated)
+├── build.bat            # Self-contained publish script
+├── clean.bat            # Artifact cleanup
+└── Launch.bat           # Quick launcher
 ```
+
+## Technical Notes
+
+- **Dark title bar**: P/Invoke into `dwmapi.dll` using `DwmSetWindowAttribute` with `DWMWA_USE_IMMERSIVE_DARK_MODE` (attribute 19). Works best on Windows 11; functional on Windows 10 1809+.
+- **Dynamic layout**: On resize, the form calculates `Math.Max(1, (Height - 35) / 60)` to decide how many bars to show, then adds or removes controls accordingly.
+- **Folder display**: Shows only the leaf folder name via `Path.GetFileName()`, with special handling for drive roots like `C:\`.
+- **Window style**: `SizableToolWindow` border gives a minimal title bar while keeping resize handles.
 
 ## License
 
-MIT License
+[MIT](https://opensource.org/licenses/MIT)
